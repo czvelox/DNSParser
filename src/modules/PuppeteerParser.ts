@@ -19,7 +19,7 @@ export class PuppeteerParser {
 
     /** Инициализация браузера Puppeteer. */
     public static async init() {
-        this.browser = await puppeteer.launch({ headless: true });
+        this.browser = await puppeteer.launch({ headless: 'new' });
     }
 
     /** Закрытие браузера Puppeteer. */
@@ -76,7 +76,7 @@ export class PuppeteerParser {
                 const items = document.querySelectorAll('.catalog-product');
             
                 items.forEach((item) => {
-                    const name = item.querySelector(".catalog-product__name")?.textContent;
+                    const name = item.querySelector(".catalog-product__name")?.textContent?.replace('"', '\'');
                     const price = Number(item.querySelector(".product-buy__price")?.textContent?.replace(/[^\d]/g, ""));
             
                     if (name && price)
